@@ -40,7 +40,7 @@ export const EditContactButton = () => {
         <DialogTrigger asChild>
           <Button
             variant="outline"
-            className="rounded-xl dark:bg-transparent dark:hover:bg-transparent dark:border-secondary border-2 px-[4.25rem] text-sm"
+            className="rounded-xl dark:bg-transparent dark:hover:bg-transparent dark:border-secondary border-2 px-auto text-xl"
           >
             Edit
           </Button>

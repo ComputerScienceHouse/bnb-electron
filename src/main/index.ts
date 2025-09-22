@@ -12,7 +12,8 @@ function createWindow(): void {
     height: 600,
     show: false,
     autoHideMenuBar: true,
-    ...(process.platform === 'linux' ? { icon } : {}),
+    backgroundColor: '#292929',
+    ...(process.platform === 'linux' ? { icon, fullscreen: true } : {}),
     webPreferences: {
       preload: join(__dirname, '../preload/index.js'),
       sandbox: false
@@ -76,6 +77,7 @@ app.on('window-all-closed', () => {
 })
 
 app.whenReady().then(() => {
+  app.commandLine.appendSwitch('use-angle', 'gl')
   globalShortcut.register('CommandOrControl+K', () => {
     const focusedWindow = BrowserWindow.getFocusedWindow()
     if (focusedWindow) {

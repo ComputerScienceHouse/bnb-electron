@@ -24,11 +24,11 @@ function Welcome() {
       <AnimatedPage>
         <div className="flex flex-col gap-5">
           <div className="m-4 mb-0 flex flex-row justify-between items-center">
-            <h1 className="text-2xl font-mono font-semibold">Welcome</h1>
-            <Link to="/info">
+            <h1 className="text-5xl font-mono font-semibold">Welcome</h1>
+            <Link to="/info" className='mt-2'>
               <Button
                 variant="ghost"
-                className="dark:hover:bg-transparent [&_svg:not([class*='size-'])]:size-10"
+                className="dark:hover:bg-transparent [&_svg:not([class*='size-'])]:size-15"
               >
                 <Info />
               </Button>
@@ -37,7 +37,7 @@ function Welcome() {
           <div className="flex gap-10 flex-col items-center">
             <img className="w-96 h-auto" src={bnbLogo}></img>
             <Button onClick={handleTapCard} className="w-96 px-20 py-7 rounded-full text-xl">
-              <Link to="/name" className="flex flex-row">
+              <Link to="/name" className="flex flex-row text-2xl justify-center gap-x-3 font-sans">
                 <img className="w-7 h-auto" src={tapIcon}></img>Tap Card to Continue
               </Link>
             </Button>

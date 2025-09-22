@@ -12,26 +12,27 @@ export const Route = createFileRoute('/cart')({
 
 function Cart() {
   const items = useCartStore((state) => state.items)
-  const isEmpty = items.length === 0
+  let isEmpty = items.length === 0
   const subtotal = items.reduce((sum, item) => sum + item.price * item.quantity, 0)
   const navigate = useNavigate()
+  isEmpty = true;
 
   return (
     <AnimatedPage>
       <div className="flex flex-row justify-between h-screen">
         <div className="flex flex-col gap-5 m-3 w-[70%]">
           <div className="flex flex-row gap-x-2 items-center">
-            <h1 className="text-2xl font-mono font-semibold left">Cart</h1>
+            <h1 className="text-5xl font-mono font-semibold left">Cart</h1>
             <Button variant="outline" onClick={() => navigate({ to: '/close-doors' })}>
               Next
             </Button>
           </div>
           <div className="flex flex-row justify-between">
-            <p className="font-mono">Your cart</p>
+            <p className="font-mono text-2xl">Your cart</p>
             {isEmpty ? null : <p className="font-semibold">Subtotal: ${subtotal.toFixed(2)}</p>}
           </div>
           {isEmpty ? (
-            <p className="flex text-center text-lg mx-auto my-28">
+            <p className="flex text-center text-3xl mx-auto my-28">
               Welcome [Y/N] <br />
               Your cart is empty, please grab your snacks
               <br />

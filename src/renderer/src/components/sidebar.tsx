@@ -24,7 +24,7 @@ export function Sidebar({ variant }: SidebarProps) {
       <div className={cn('items-center', variant === 'receipt' ? 'pt-1' : 'pt-4')}>
         {variant === 'cart' && (
           <Link to="/">
-            <Button variant="secondary" className="rounded-xl px-[4.25rem] py-8 text-sm">
+            <Button variant="secondary" className="rounded-xl px-[4.25rem] py-8 px-10 text-xl">
               Cancel Transaction
             </Button>
           </Link>
@@ -33,7 +33,7 @@ export function Sidebar({ variant }: SidebarProps) {
           <Link to="/">
             <Button
               variant="outline"
-              className="rounded-xl px-[4.25rem] py-8 text-sm dark:hover:bg-transparent dark:bg-transparent dark:border-secondary"
+              className="rounded-xl px-[4.25rem] py-8 px-10 text-xl dark:hover:bg-transparent dark:bg-transparent dark:border-secondary"
             >
               Finish Transaction
             </Button>
@@ -41,7 +41,7 @@ export function Sidebar({ variant }: SidebarProps) {
         )}
       </div>
 
-      <div className="flex flex-col gap-y-4">
+      <div className="flex flex-col gap-y-4 text-xl">
         <p className="font-bold text-center">Current User Information</p>
         <div className={cn('flex flex-col', variant === 'cart' ? 'gap-y-4' : 'gap-y-2')}>
           <UserInfoField icon={<SquareUser />} field={{ label: 'Name', value: 'John Doe' }} />
@@ -54,13 +54,13 @@ export function Sidebar({ variant }: SidebarProps) {
 
       <>
         {variant === 'cart' && (
-          <div className="flex flex-row items-center gap-x-3">
+          <div className="text-xl flex flex-row items-center gap-x-3">
             <img className="w-7 h-7" src={Union} alt="" />
             Finished? Close the door
           </div>
         )}
         {variant === 'receipt' && (
-          <div className="flex flex-row items-center justify-center gap-x-0.5">
+          <div className="text-xl flex flex-row items-center justify-center gap-x-0.5">
             <img className="w-16 h-16 object-contain" src={Timer} alt="Timer Icon" />
             <div className="h-16 flex flex-col justify-center text-sm w-7/12 ">
               <p className="text-sm font-bold leading-none">
