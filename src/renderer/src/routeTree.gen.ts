@@ -8,132 +8,56 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
-// Import Routes
+import { Route as rootRouteImport } from './routes/__root'
+import { Route as TareRouteImport } from './routes/tare'
+import { Route as ReceiptRouteImport } from './routes/receipt'
+import { Route as NameRouteImport } from './routes/name'
+import { Route as InfoRouteImport } from './routes/info'
+import { Route as CloseDoorsRouteImport } from './routes/close-doors'
+import { Route as CartRouteImport } from './routes/cart'
+import { Route as AdminRouteImport } from './routes/admin'
+import { Route as IndexRouteImport } from './routes/index'
 
-import { Route as rootRoute } from './routes/__root'
-import { Route as TareImport } from './routes/tare'
-import { Route as ReceiptImport } from './routes/receipt'
-import { Route as NameImport } from './routes/name'
-import { Route as InfoImport } from './routes/info'
-import { Route as CloseDoorsImport } from './routes/close-doors'
-import { Route as CartImport } from './routes/cart'
-import { Route as AdminImport } from './routes/admin'
-import { Route as IndexImport } from './routes/index'
-
-// Create/Update Routes
-
-const TareRoute = TareImport.update({
+const TareRoute = TareRouteImport.update({
   id: '/tare',
   path: '/tare',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const ReceiptRoute = ReceiptImport.update({
+const ReceiptRoute = ReceiptRouteImport.update({
   id: '/receipt',
   path: '/receipt',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const NameRoute = NameImport.update({
+const NameRoute = NameRouteImport.update({
   id: '/name',
   path: '/name',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const InfoRoute = InfoImport.update({
+const InfoRoute = InfoRouteImport.update({
   id: '/info',
   path: '/info',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const CloseDoorsRoute = CloseDoorsImport.update({
+const CloseDoorsRoute = CloseDoorsRouteImport.update({
   id: '/close-doors',
   path: '/close-doors',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const CartRoute = CartImport.update({
+const CartRoute = CartRouteImport.update({
   id: '/cart',
   path: '/cart',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const AdminRoute = AdminImport.update({
+const AdminRoute = AdminRouteImport.update({
   id: '/admin',
   path: '/admin',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const IndexRoute = IndexImport.update({
+const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-// Populate the FileRoutesByPath interface
-
-declare module '@tanstack/react-router' {
-  interface FileRoutesByPath {
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexImport
-      parentRoute: typeof rootRoute
-    }
-    '/admin': {
-      id: '/admin'
-      path: '/admin'
-      fullPath: '/admin'
-      preLoaderRoute: typeof AdminImport
-      parentRoute: typeof rootRoute
-    }
-    '/cart': {
-      id: '/cart'
-      path: '/cart'
-      fullPath: '/cart'
-      preLoaderRoute: typeof CartImport
-      parentRoute: typeof rootRoute
-    }
-    '/close-doors': {
-      id: '/close-doors'
-      path: '/close-doors'
-      fullPath: '/close-doors'
-      preLoaderRoute: typeof CloseDoorsImport
-      parentRoute: typeof rootRoute
-    }
-    '/info': {
-      id: '/info'
-      path: '/info'
-      fullPath: '/info'
-      preLoaderRoute: typeof InfoImport
-      parentRoute: typeof rootRoute
-    }
-    '/name': {
-      id: '/name'
-      path: '/name'
-      fullPath: '/name'
-      preLoaderRoute: typeof NameImport
-      parentRoute: typeof rootRoute
-    }
-    '/receipt': {
-      id: '/receipt'
-      path: '/receipt'
-      fullPath: '/receipt'
-      preLoaderRoute: typeof ReceiptImport
-      parentRoute: typeof rootRoute
-    }
-    '/tare': {
-      id: '/tare'
-      path: '/tare'
-      fullPath: '/tare'
-      preLoaderRoute: typeof TareImport
-      parentRoute: typeof rootRoute
-    }
-  }
-}
-
-// Create and export the route tree
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -145,7 +69,6 @@ export interface FileRoutesByFullPath {
   '/receipt': typeof ReceiptRoute
   '/tare': typeof TareRoute
 }
-
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/admin': typeof AdminRoute
@@ -156,9 +79,8 @@ export interface FileRoutesByTo {
   '/receipt': typeof ReceiptRoute
   '/tare': typeof TareRoute
 }
-
 export interface FileRoutesById {
-  __root__: typeof rootRoute
+  __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/admin': typeof AdminRoute
   '/cart': typeof CartRoute
@@ -168,7 +90,6 @@ export interface FileRoutesById {
   '/receipt': typeof ReceiptRoute
   '/tare': typeof TareRoute
 }
-
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
@@ -202,7 +123,6 @@ export interface FileRouteTypes {
     | '/tare'
   fileRoutesById: FileRoutesById
 }
-
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AdminRoute: typeof AdminRoute
@@ -212,6 +132,67 @@ export interface RootRouteChildren {
   NameRoute: typeof NameRoute
   ReceiptRoute: typeof ReceiptRoute
   TareRoute: typeof TareRoute
+}
+
+declare module '@tanstack/react-router' {
+  interface FileRoutesByPath {
+    '/tare': {
+      id: '/tare'
+      path: '/tare'
+      fullPath: '/tare'
+      preLoaderRoute: typeof TareRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/receipt': {
+      id: '/receipt'
+      path: '/receipt'
+      fullPath: '/receipt'
+      preLoaderRoute: typeof ReceiptRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/name': {
+      id: '/name'
+      path: '/name'
+      fullPath: '/name'
+      preLoaderRoute: typeof NameRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/info': {
+      id: '/info'
+      path: '/info'
+      fullPath: '/info'
+      preLoaderRoute: typeof InfoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/close-doors': {
+      id: '/close-doors'
+      path: '/close-doors'
+      fullPath: '/close-doors'
+      preLoaderRoute: typeof CloseDoorsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cart': {
+      id: '/cart'
+      path: '/cart'
+      fullPath: '/cart'
+      preLoaderRoute: typeof CartRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+  }
 }
 
 const rootRouteChildren: RootRouteChildren = {
@@ -224,51 +205,6 @@ const rootRouteChildren: RootRouteChildren = {
   ReceiptRoute: ReceiptRoute,
   TareRoute: TareRoute,
 }
-
-export const routeTree = rootRoute
+export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-/* ROUTE_MANIFEST_START
-{
-  "routes": {
-    "__root__": {
-      "filePath": "__root.tsx",
-      "children": [
-        "/",
-        "/admin",
-        "/cart",
-        "/close-doors",
-        "/info",
-        "/name",
-        "/receipt",
-        "/tare"
-      ]
-    },
-    "/": {
-      "filePath": "index.tsx"
-    },
-    "/admin": {
-      "filePath": "admin.tsx"
-    },
-    "/cart": {
-      "filePath": "cart.tsx"
-    },
-    "/close-doors": {
-      "filePath": "close-doors.tsx"
-    },
-    "/info": {
-      "filePath": "info.tsx"
-    },
-    "/name": {
-      "filePath": "name.tsx"
-    },
-    "/receipt": {
-      "filePath": "receipt.tsx"
-    },
-    "/tare": {
-      "filePath": "tare.tsx"
-    }
-  }
-}
-ROUTE_MANIFEST_END */
