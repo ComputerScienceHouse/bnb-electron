@@ -52,27 +52,27 @@ $ git clone https://github.com/yourusername/electron-tanstack-app.git
 $ cd electron-tanstack-app
 
 # Install dependencies
-$ pnpm install
+$ npm install
 ```
 
 ## Development
 
 ```bash
 # Start the development server with hot reload
-$ pnpm dev
+$ npm run dev
 ```
 
 ## Building for Production
 
 ```bash
 # For Windows
-$ pnpm build:win
+$ npm build:win
 
 # For macOS
-$ pnpm build:mac
+$ npm build:mac
 
 # For Linux
-$ pnpm build:linux
+$ npm build:linux
 ```
 
 ## Recommended IDE Setup
