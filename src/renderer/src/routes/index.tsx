@@ -6,10 +6,19 @@ import { useUserStore } from '@renderer/store/userStore'
 import { AnimatedPage } from '@renderer/components/animated-page'
 import { Info } from 'lucide-react'
 import { AdminAccess } from '@renderer/components/admin-access'
+import { sendMessage } from '@renderer/lib/uart'
 
 export const Route = createFileRoute('/')({
   component: Welcome
 })
+
+async function openDoors() {
+  const packet = 
+    {
+      hatch: true
+    };
+  await sendMessage(JSON.stringify(packet))
+}
 
 function Welcome() {
   const setName = useUserStore((state) => state.setName)
@@ -17,6 +26,8 @@ function Welcome() {
   const handleTapCard = () => {
     const fetchedName = 'Sahil'
     setName(fetchedName)
+    openDoors();
+    // function here to actually send the open doors command through serial
   }
 
   return (

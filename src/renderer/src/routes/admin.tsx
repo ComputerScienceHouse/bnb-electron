@@ -7,6 +7,8 @@ import {
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@renderer/components/ui/tabs'
 import { createFileRoute } from '@tanstack/react-router'
 import { LockOpen, MonitorX, Power } from 'lucide-react'
+import Tare from './tare'
+import Inventory from './inventory'
 
 export const Route = createFileRoute('/admin')({
   component: Admin
@@ -43,9 +45,8 @@ function Admin() {
             </DropdownMenuContent>
           </DropdownMenu>
         </TabsList>
-        <TabsContent value="inventory">Make changes to your account here.</TabsContent>
-        <TabsContent value="tare">Change your password here.</TabsContent>
-        <TabsContent value="system">System administrative content here.</TabsContent>
+        <TabsContent value="inventory"><Inventory/></TabsContent>
+        <TabsContent value="tare"><Tare/></TabsContent>
       </Tabs>
     </div>
   )
