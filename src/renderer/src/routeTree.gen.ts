@@ -8,58 +8,67 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
-// Import Routes
-
-import { Route as rootRoute } from './routes/__root'
-import { Route as TareImport } from './routes/tare'
-import { Route as ReceiptImport } from './routes/receipt'
-import { Route as NameImport } from './routes/name'
-import { Route as InfoImport } from './routes/info'
-import { Route as CloseDoorsImport } from './routes/close-doors'
-import { Route as CartImport } from './routes/cart'
-import { Route as AdminImport } from './routes/admin'
-import { Route as IndexImport } from './routes/index'
-
-// Create/Update Routes
+import { Route as rootRouteImport } from './routes/__root'
+import { Route as TareRouteImport } from './routes/tare'
+import { Route as ReceiptRouteImport } from './routes/receipt'
+import { Route as NameRouteImport } from './routes/name'
+import { Route as InventoryRouteImport } from './routes/inventory'
+import { Route as InfoRouteImport } from './routes/info'
+import { Route as CloseDoorsRouteImport } from './routes/close-doors'
+import { Route as CartRouteImport } from './routes/cart'
+import { Route as AdminRouteImport } from './routes/admin'
+import { Route as IndexRouteImport } from './routes/index'
 
 const TareRoute = TareRouteImport.update({
   id: '/tare',
   path: '/tare',
+  getParentRoute: () => rootRouteImport,
   getParentRoute: () => rootRouteImport,
 } as any)
 const ReceiptRoute = ReceiptRouteImport.update({
   id: '/receipt',
   path: '/receipt',
   getParentRoute: () => rootRouteImport,
+  getParentRoute: () => rootRouteImport,
 } as any)
 const NameRoute = NameRouteImport.update({
   id: '/name',
   path: '/name',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InventoryRoute = InventoryRouteImport.update({
+  id: '/inventory',
+  path: '/inventory',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const InfoRoute = InfoRouteImport.update({
   id: '/info',
   path: '/info',
+  getParentRoute: () => rootRouteImport,
   getParentRoute: () => rootRouteImport,
 } as any)
 const CloseDoorsRoute = CloseDoorsRouteImport.update({
   id: '/close-doors',
   path: '/close-doors',
   getParentRoute: () => rootRouteImport,
+  getParentRoute: () => rootRouteImport,
 } as any)
 const CartRoute = CartRouteImport.update({
   id: '/cart',
   path: '/cart',
+  getParentRoute: () => rootRouteImport,
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdminRoute = AdminRouteImport.update({
   id: '/admin',
   path: '/admin',
   getParentRoute: () => rootRouteImport,
+  getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
   getParentRoute: () => rootRouteImport,
 } as any)
 
@@ -86,6 +95,7 @@ export interface FileRoutesByTo {
   '/tare': typeof TareRoute
 }
 export interface FileRoutesById {
+  __root__: typeof rootRouteImport
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/admin': typeof AdminRoute
@@ -143,6 +153,74 @@ export interface RootRouteChildren {
   NameRoute: typeof NameRoute
   ReceiptRoute: typeof ReceiptRoute
   TareRoute: typeof TareRoute
+}
+
+declare module '@tanstack/react-router' {
+  interface FileRoutesByPath {
+    '/tare': {
+      id: '/tare'
+      path: '/tare'
+      fullPath: '/tare'
+      preLoaderRoute: typeof TareRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/receipt': {
+      id: '/receipt'
+      path: '/receipt'
+      fullPath: '/receipt'
+      preLoaderRoute: typeof ReceiptRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/name': {
+      id: '/name'
+      path: '/name'
+      fullPath: '/name'
+      preLoaderRoute: typeof NameRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/inventory': {
+      id: '/inventory'
+      path: '/inventory'
+      fullPath: '/inventory'
+      preLoaderRoute: typeof InventoryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/info': {
+      id: '/info'
+      path: '/info'
+      fullPath: '/info'
+      preLoaderRoute: typeof InfoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/close-doors': {
+      id: '/close-doors'
+      path: '/close-doors'
+      fullPath: '/close-doors'
+      preLoaderRoute: typeof CloseDoorsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cart': {
+      id: '/cart'
+      path: '/cart'
+      fullPath: '/cart'
+      preLoaderRoute: typeof CartRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+  }
 }
 
 const rootRouteChildren: RootRouteChildren = {
