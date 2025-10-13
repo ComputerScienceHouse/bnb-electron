@@ -51,7 +51,7 @@ export const Keyboard = ({ onKeyPress }: { onKeyPress: (key: string) => void }) 
                 key={key}
                 onClick={() => handleKeyPress(key)}
                 variant={specialKeys.includes(key) ? 'secondary' : 'outline'}
-                className={cn('h-14 text-lg font-mono font-normal px-3', {
+                className={cn('h-14 text-lg font-mono font-normal px-3 dark:active:bg-background/60', {
                   'flex-1': key.length === 1,
                   'w-20': key.length > 1 && key !== 'Space',
                   'flex-[5]': key === 'Space'

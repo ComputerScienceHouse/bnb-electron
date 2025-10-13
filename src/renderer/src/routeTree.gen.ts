@@ -8,16 +8,19 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
-import { Route as rootRouteImport } from './routes/__root'
-import { Route as TareRouteImport } from './routes/tare'
-import { Route as ReceiptRouteImport } from './routes/receipt'
-import { Route as NameRouteImport } from './routes/name'
-import { Route as InventoryRouteImport } from './routes/inventory'
-import { Route as InfoRouteImport } from './routes/info'
-import { Route as CloseDoorsRouteImport } from './routes/close-doors'
-import { Route as CartRouteImport } from './routes/cart'
-import { Route as AdminRouteImport } from './routes/admin'
-import { Route as IndexRouteImport } from './routes/index'
+// Import Routes
+
+import { Route as rootRoute } from './routes/__root'
+import { Route as TareImport } from './routes/tare'
+import { Route as ReceiptImport } from './routes/receipt'
+import { Route as NameImport } from './routes/name'
+import { Route as InfoImport } from './routes/info'
+import { Route as CloseDoorsImport } from './routes/close-doors'
+import { Route as CartImport } from './routes/cart'
+import { Route as AdminImport } from './routes/admin'
+import { Route as IndexImport } from './routes/index'
+
+// Create/Update Routes
 
 const TareRoute = TareRouteImport.update({
   id: '/tare',
@@ -32,12 +35,7 @@ const ReceiptRoute = ReceiptRouteImport.update({
 const NameRoute = NameRouteImport.update({
   id: '/name',
   path: '/name',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const InventoryRoute = InventoryRouteImport.update({
-  id: '/inventory',
-  path: '/inventory',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => rootRoute,
 } as any)
 const InfoRoute = InfoRouteImport.update({
   id: '/info',
@@ -145,74 +143,6 @@ export interface RootRouteChildren {
   NameRoute: typeof NameRoute
   ReceiptRoute: typeof ReceiptRoute
   TareRoute: typeof TareRoute
-}
-
-declare module '@tanstack/react-router' {
-  interface FileRoutesByPath {
-    '/tare': {
-      id: '/tare'
-      path: '/tare'
-      fullPath: '/tare'
-      preLoaderRoute: typeof TareRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/receipt': {
-      id: '/receipt'
-      path: '/receipt'
-      fullPath: '/receipt'
-      preLoaderRoute: typeof ReceiptRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/name': {
-      id: '/name'
-      path: '/name'
-      fullPath: '/name'
-      preLoaderRoute: typeof NameRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/inventory': {
-      id: '/inventory'
-      path: '/inventory'
-      fullPath: '/inventory'
-      preLoaderRoute: typeof InventoryRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/info': {
-      id: '/info'
-      path: '/info'
-      fullPath: '/info'
-      preLoaderRoute: typeof InfoRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/close-doors': {
-      id: '/close-doors'
-      path: '/close-doors'
-      fullPath: '/close-doors'
-      preLoaderRoute: typeof CloseDoorsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/cart': {
-      id: '/cart'
-      path: '/cart'
-      fullPath: '/cart'
-      preLoaderRoute: typeof CartRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/admin': {
-      id: '/admin'
-      path: '/admin'
-      fullPath: '/admin'
-      preLoaderRoute: typeof AdminRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-  }
 }
 
 const rootRouteChildren: RootRouteChildren = {
