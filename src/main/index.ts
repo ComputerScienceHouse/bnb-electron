@@ -6,6 +6,7 @@ import { createIPCHandler } from 'electron-trpc/main'
 import { router } from '../main/api'
 import { SerialPort } from 'serialport'
 import * as uart from './uart'
+import {exec} from 'child_process'
 
 let mainWindow: BrowserWindow
 
@@ -94,7 +95,7 @@ app.whenReady().then(() => {
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
 ipcMain.handle('serial:connect', async (_event) => {
-  return uart.connect(mainWindow, '/dev/tty.usbmodem101');
+  return uart.connect(mainWindow, '/dev/ttyS0');
 });
 
 ipcMain.handle('serial:disconnect', () => {
@@ -108,3 +109,17 @@ ipcMain.on('serial:send-data', (_event, data: string) => {
 ipcMain.handle('serial:list-ports', async () => {
   return uart.listPorts();
 });
+
+ipcMain.on('system:poweroff', async () => {
+  exec('sudo poweroff', (error) => { 
+    if(error) {
+      console.log(`Failed to power off: ${error}`);
+      return
+    }
+  console.log('Shutdown command issued');
+  }) 
+})
+
+ipcMain.on('system:exit', async () => {
+  app.quit();
+})

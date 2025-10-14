@@ -37,7 +37,7 @@ function Welcome() {
 
   const handleTapCard = () => {
     console.log('Sending open doors command...');
-    const packet = { hatch: true };
+    const packet = { hatch: 1 };
     const command = JSON.stringify(packet) + '\n';
     window.serialApi.sendData(command);
     // Navigate to the next screen

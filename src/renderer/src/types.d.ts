@@ -8,9 +8,15 @@ export interface ISerialAPI {
   onSerialError: (callback: (error: string) => void) => void;
 }
 
+interface ISystemAPI {
+  poweroff: () => void
+  exit: () => void
+}
+
 // Add it to the global window object
 declare global {
   interface Window {
     serialApi: ISerialAPI;
+    systemApi: ISystemAPI;
   }
 }

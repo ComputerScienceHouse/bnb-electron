@@ -1,6 +1,6 @@
 import { createRootRoute, Outlet } from '@tanstack/react-router'
 import { AnimatedPage } from '@renderer/components/animated-page'
-import { useSerialConnection } from '@renderer/lib/useSerialConnection'
+import { useSerialConnection } from '@renderer/hooks/useSerialConnection'
 import '@renderer/assets/global.css'
 import { useEffect, useState } from 'react';
 

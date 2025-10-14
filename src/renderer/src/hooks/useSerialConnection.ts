@@ -25,7 +25,7 @@ export function useSerialConnection() {
         });
         
         // Use the first available port
-        portPath = '/dev/tty.usbmodem101';
+        portPath = '/dev/ttyS0';
         
         await window.serialApi.connect(portPath);
         setIsConnected(true);
