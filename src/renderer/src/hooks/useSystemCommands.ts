@@ -13,13 +13,13 @@ export default function useSystemCommands() {
 
   // Serial commands that use your existing serial API
   const openHatch = useCallback(() => {
-    const packet = { hatch: 1 }
+    const packet = { hatch: true }
     const command = JSON.stringify(packet) + '\n'
     window.serialApi.sendData(command)
   }, [])
 
   const openDoors = useCallback(() => {
-    const packet = { doors: 1 }
+    const packet = { doors: true }
     const command = JSON.stringify(packet) + '\n'
     window.serialApi.sendData(command)
   }, [])

@@ -63,7 +63,7 @@ export default function Tare() {
                 <h3 className="text-lg capitalize font-semibold mb-2">{shelf.replace('_', ' ')}</h3>
                 <div className="flex flex-1 gap-2">
                   {tare_buttons[shelf].map((slot) => (
-                    <Slot key={`${shelf}-${slot}`} slot={slot} className="size-1/4 h-full bg-white/20 backdrop-blur-lg rounded-xl" />
+                    <Slot key={`${shelf}-${slot}`} slot={slot} className="size-1/4 h-full bg-white/20 hover:bg-white/30 focus:bg-green-600 active:bg-green-600 backdrop-blur-lg rounded-xl" />
                   ))}
                 </div>
               </div>
@@ -77,7 +77,7 @@ export default function Tare() {
                 <h3 className="text-lg capitalize font-semibold mb-2">{shelf.replace('_', ' ')}</h3>
                 <div className="flex flex-1 gap-2">
                   {tare_buttons[shelf].map((slot) => (
-                    <Slot key={`${shelf}-${slot}`} slot={slot} className="size-1/4 h-full bg-white/20 backdrop-blur-lg rounded-xl"/>
+                    <Slot key={`${shelf}-${slot}`} slot={slot} className="size-1/4 h-full bg-white/20 hover:bg-white/30 focus:bg-green-600 active:bg-green-600 backdrop-blur-lg rounded-xl"/>
                   ))}
                 </div>
               </div>

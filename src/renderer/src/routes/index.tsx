@@ -6,20 +6,13 @@ import { useUserStore } from '@renderer/store/userStore'
 import { AnimatedPage } from '@renderer/components/animated-page'
 import { Info } from 'lucide-react'
 import { AdminAccess } from '@renderer/components/admin-access'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 
 export const Route = createFileRoute('/')({
   component: Welcome
 })
 
-// function openDoors() {
-//   const packet = {
-//     hatch: true
-//   };
-//   const command = JSON.stringify(packet) + '\n';
-//   window.serialApi.sendData(command);
-//   console.log('Sent "open doors" command.');
-// }
+
 
 function Welcome() {
   const setName = useUserStore((state) => state.setName)
@@ -27,17 +20,13 @@ function Welcome() {
 
   useEffect(() => {
     window.serialApi.onSerialData((data: string) => {
-      // ✅ ADD THIS LINE to see the data in the app's console.
       console.log('[React Component] Received data from main process:', data);
-
-      // This is where you would update your state to display it
-      // setSerialLog(prevLog => [...prevLog, data.trim()]);
     });
   }, []);
 
   const handleTapCard = () => {
     console.log('Sending open doors command...');
-    const packet = { hatch: 1 };
+    const packet = { doors: true };
     const command = JSON.stringify(packet) + '\n';
     window.serialApi.sendData(command);
     // Navigate to the next screen

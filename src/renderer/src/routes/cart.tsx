@@ -5,17 +5,46 @@ import { createFileRoute, useNavigate } from '@tanstack/react-router'
 import { Button } from '@renderer/components/ui/button'
 import { AnimatedPage } from '@renderer/components/animated-page'
 import { useCartStore } from '@renderer/store/cartStore'
+import { useEffect, useState } from 'react'
+import { usePrevious } from '@renderer/hooks/usePrevious'
+import { truncate } from 'node:original-fs'
 
 export const Route = createFileRoute('/cart')({
   component: Cart
 })
+
+interface SerialData {
+  doors: boolean;
+  hatch: boolean;
+}
 
 function Cart() {
   const items = useCartStore((state) => state.items)
   let isEmpty = items.length === 0
   const subtotal = items.reduce((sum, item) => sum + item.price * item.quantity, 0)
   const navigate = useNavigate()
+  const [data, setData] = useState<SerialData>({doors: false, hatch: false});  
   isEmpty = true;
+  const previousDoorsState = usePrevious(data.doors)
+  
+  useEffect(() => {
+    const removeListener = window.electron.ipcRenderer.on('serial:data', (event, data: SerialData) => {
+      console.log('Data recieved in frontend: ', data);
+      if(data) {
+        setData(data)
+      }
+    });
+
+    return () => {
+      removeListener();
+    }
+  }, [])
+
+  useEffect(() => {
+    if (previousDoorsState === false && data.doors === true) {
+      navigate({ to: '/close-doors' });
+    }
+  }, [data, previousDoorsState]);
 
   return (
     <AnimatedPage>
@@ -32,14 +61,17 @@ function Cart() {
             {isEmpty ? null : <p className="font-semibold">Subtotal: ${subtotal.toFixed(2)}</p>}
           </div>
           {isEmpty ? (
-            <p className="flex text-center text-3xl mx-auto my-28">
-              Welcome [Y/N] <br />
-              Your cart is empty, please grab your snacks
-              <br />
-              from the cabinet to start.
-              <br />
-              We’ll do the rest
-            </p>
+            <>
+              <p>Current Door Status: {data?.doors ? 'Closed' : 'Open'}</p>
+              <p className="flex text-center text-3xl mx-auto my-28">
+                Welcome [Y/N] <br />
+                Your cart is empty, please grab your snacks
+                <br />
+                from the cabinet to start.
+                <br />
+                We’ll do the rest
+              </p>
+            </>
           ) : (
             <ScrollArea className="flex-1 overflow-auto">
               <div className="flex gap-5 flex-col items-center">
