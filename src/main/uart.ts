@@ -169,7 +169,7 @@ export async function connect(window: BrowserWindow, path: string): Promise<void
   }
 
   console.log(`Attempting to open port: ${path}`);
-  port = new SerialPort({ path, baudRate: 115200, autoOpen: false });
+  port = new SerialPort({ path, baudRate: 115200, autoOpen: false, lock: false});
 
   // Forward all incoming data to the renderer process
   port.on('data', (data: Buffer) => {
