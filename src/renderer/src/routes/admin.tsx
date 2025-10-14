@@ -8,8 +8,8 @@ import {
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@renderer/components/ui/tabs'
 import { createFileRoute } from '@tanstack/react-router'
 import { LockOpen, MonitorX, Power } from 'lucide-react'
-import Tare from './tare'
-import Inventory from './inventory'
+// import Tare from './tare'
+// import Inventory from './inventory'
 
 export const Route = createFileRoute('/admin')({
   component: Admin

@@ -23,12 +23,10 @@ const TareRoute = TareRouteImport.update({
   id: '/tare',
   path: '/tare',
   getParentRoute: () => rootRouteImport,
-  getParentRoute: () => rootRouteImport,
 } as any)
 const ReceiptRoute = ReceiptRouteImport.update({
   id: '/receipt',
   path: '/receipt',
-  getParentRoute: () => rootRouteImport,
   getParentRoute: () => rootRouteImport,
 } as any)
 const NameRoute = NameRouteImport.update({
@@ -45,30 +43,25 @@ const InfoRoute = InfoRouteImport.update({
   id: '/info',
   path: '/info',
   getParentRoute: () => rootRouteImport,
-  getParentRoute: () => rootRouteImport,
 } as any)
 const CloseDoorsRoute = CloseDoorsRouteImport.update({
   id: '/close-doors',
   path: '/close-doors',
-  getParentRoute: () => rootRouteImport,
   getParentRoute: () => rootRouteImport,
 } as any)
 const CartRoute = CartRouteImport.update({
   id: '/cart',
   path: '/cart',
   getParentRoute: () => rootRouteImport,
-  getParentRoute: () => rootRouteImport,
 } as any)
 const AdminRoute = AdminRouteImport.update({
   id: '/admin',
   path: '/admin',
   getParentRoute: () => rootRouteImport,
-  getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRouteImport,
   getParentRoute: () => rootRouteImport,
 } as any)
 
@@ -95,7 +88,6 @@ export interface FileRoutesByTo {
   '/tare': typeof TareRoute
 }
 export interface FileRoutesById {
-  __root__: typeof rootRouteImport
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/admin': typeof AdminRoute

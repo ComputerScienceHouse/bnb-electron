@@ -4,10 +4,14 @@ import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
 import { createIPCHandler } from 'electron-trpc/main'
 import { router } from '../main/api'
+import { SerialPort } from 'serialport'
+import * as uart from './uart'
+
+let mainWindow: BrowserWindow
 
 function createWindow(): void {
   // Create the browser window.
-  const mainWindow = new BrowserWindow({
+  mainWindow = new BrowserWindow({
     width: 1024,
     height: 600,
     show: false,
@@ -21,6 +25,7 @@ function createWindow(): void {
     frame: false,
     resizable: true
   })
+
   createIPCHandler({ router, windows: [mainWindow] })
 
   mainWindow.on('ready-to-show', () => {
@@ -88,3 +93,18 @@ app.whenReady().then(() => {
 })
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
+ipcMain.handle('serial:connect', async (_event) => {
+  return uart.connect(mainWindow, '/dev/tty.usbmodem101');
+});
+
+ipcMain.handle('serial:disconnect', () => {
+  return uart.disconnect();
+});
+
+ipcMain.on('serial:send-data', (_event, data: string) => {
+  uart.sendData(data);
+});
+
+ipcMain.handle('serial:list-ports', async () => {
+  return uart.listPorts();
+});

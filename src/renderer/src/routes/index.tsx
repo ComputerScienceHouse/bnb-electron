@@ -1,34 +1,49 @@
 import bnbLogo from '../assets/bnb.svg'
 import { Button } from '../components/ui/button'
 import tapIcon from '../assets/tap.svg'
-import { Link, createFileRoute } from '@tanstack/react-router'
+import { Link, createFileRoute, useNavigate } from '@tanstack/react-router'
 import { useUserStore } from '@renderer/store/userStore'
 import { AnimatedPage } from '@renderer/components/animated-page'
 import { Info } from 'lucide-react'
 import { AdminAccess } from '@renderer/components/admin-access'
-import { sendMessage } from '@renderer/lib/uart'
+import { useEffect, useState } from 'react'
 
 export const Route = createFileRoute('/')({
   component: Welcome
 })
 
-async function openDoors() {
-  const packet = 
-    {
-      hatch: true
-    };
-  await sendMessage(JSON.stringify(packet))
-}
+// function openDoors() {
+//   const packet = {
+//     hatch: true
+//   };
+//   const command = JSON.stringify(packet) + '\n';
+//   window.serialApi.sendData(command);
+//   console.log('Sent "open doors" command.');
+// }
 
 function Welcome() {
   const setName = useUserStore((state) => state.setName)
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    window.serialApi.onSerialData((data: string) => {
+      // ✅ ADD THIS LINE to see the data in the app's console.
+      console.log('[React Component] Received data from main process:', data);
+
+      // This is where you would update your state to display it
+      // setSerialLog(prevLog => [...prevLog, data.trim()]);
+    });
+  }, []);
 
   const handleTapCard = () => {
-    const fetchedName = 'Sahil'
-    setName(fetchedName)
-    openDoors();
-    // function here to actually send the open doors command through serial
-  }
+    console.log('Sending open doors command...');
+    const packet = { hatch: true };
+    const command = JSON.stringify(packet) + '\n';
+    window.serialApi.sendData(command);
+    // Navigate to the next screen
+    setName('Sahil')
+    navigate({ to: '/name' });
+  };
 
   return (
     <AdminAccess>
@@ -48,9 +63,9 @@ function Welcome() {
           <div className="flex gap-10 flex-col items-center">
             <img className="w-96 h-auto" src={bnbLogo}></img>
             <Button onClick={handleTapCard} className="w-96 px-20 py-7 rounded-full text-xl">
-              <Link to="/name" className="flex flex-row text-2xl justify-center gap-x-3 font-sans">
+              <div className="flex flex-row text-2xl justify-center gap-x-3 font-sans">
                 <img className="w-7 h-auto" src={tapIcon}></img>Tap Card to Continue
-              </Link>
+              </div>
             </Button>
           </div>
         </div>
