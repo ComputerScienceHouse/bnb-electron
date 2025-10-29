@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as TareRouteImport } from './routes/tare'
+import { Route as SystemRouteImport } from './routes/system'
 import { Route as ReceiptRouteImport } from './routes/receipt'
 import { Route as NameRouteImport } from './routes/name'
 import { Route as InventoryRouteImport } from './routes/inventory'
@@ -22,6 +23,11 @@ import { Route as IndexRouteImport } from './routes/index'
 const TareRoute = TareRouteImport.update({
   id: '/tare',
   path: '/tare',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SystemRoute = SystemRouteImport.update({
+  id: '/system',
+  path: '/system',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ReceiptRoute = ReceiptRouteImport.update({
@@ -74,6 +80,7 @@ export interface FileRoutesByFullPath {
   '/inventory': typeof InventoryRoute
   '/name': typeof NameRoute
   '/receipt': typeof ReceiptRoute
+  '/system': typeof SystemRoute
   '/tare': typeof TareRoute
 }
 export interface FileRoutesByTo {
@@ -85,6 +92,7 @@ export interface FileRoutesByTo {
   '/inventory': typeof InventoryRoute
   '/name': typeof NameRoute
   '/receipt': typeof ReceiptRoute
+  '/system': typeof SystemRoute
   '/tare': typeof TareRoute
 }
 export interface FileRoutesById {
@@ -97,6 +105,7 @@ export interface FileRoutesById {
   '/inventory': typeof InventoryRoute
   '/name': typeof NameRoute
   '/receipt': typeof ReceiptRoute
+  '/system': typeof SystemRoute
   '/tare': typeof TareRoute
 }
 export interface FileRouteTypes {
@@ -110,6 +119,7 @@ export interface FileRouteTypes {
     | '/inventory'
     | '/name'
     | '/receipt'
+    | '/system'
     | '/tare'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -121,6 +131,7 @@ export interface FileRouteTypes {
     | '/inventory'
     | '/name'
     | '/receipt'
+    | '/system'
     | '/tare'
   id:
     | '__root__'
@@ -132,6 +143,7 @@ export interface FileRouteTypes {
     | '/inventory'
     | '/name'
     | '/receipt'
+    | '/system'
     | '/tare'
   fileRoutesById: FileRoutesById
 }
@@ -144,6 +156,7 @@ export interface RootRouteChildren {
   InventoryRoute: typeof InventoryRoute
   NameRoute: typeof NameRoute
   ReceiptRoute: typeof ReceiptRoute
+  SystemRoute: typeof SystemRoute
   TareRoute: typeof TareRoute
 }
 
@@ -154,6 +167,13 @@ declare module '@tanstack/react-router' {
       path: '/tare'
       fullPath: '/tare'
       preLoaderRoute: typeof TareRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/system': {
+      id: '/system'
+      path: '/system'
+      fullPath: '/system'
+      preLoaderRoute: typeof SystemRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/receipt': {
@@ -224,6 +244,7 @@ const rootRouteChildren: RootRouteChildren = {
   InventoryRoute: InventoryRoute,
   NameRoute: NameRoute,
   ReceiptRoute: ReceiptRoute,
+  SystemRoute: SystemRoute,
   TareRoute: TareRoute,
 }
 export const routeTree = rootRouteImport
